@@ -13,22 +13,28 @@ public class ValidationServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String user = request.getParameter("user");
+        String pwd = request.getParameter("pwd");
 
         response.setContentType("text/html");
 
-        if(user.matches("^[A-Z][a-zA-Z]{2,}$")) {
+        // UC3 Name validation
+        boolean validName = user.matches("^[A-Z][a-zA-Z]{2,}$");
+
+        // UC4 Password validation
+        boolean validPassword = pwd.matches("^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).{8,}$");
+
+        if(validName && validPassword) {
 
             request.setAttribute("user", user);
 
             RequestDispatcher rd =
                     request.getRequestDispatcher("LoginSuccess.jsp");
 
-            rd.forward(request, response);
+            rd.forward(request,response);
 
         } else {
 
-            response.getWriter().println("<h3>Invalid Name</h3>");
-            response.getWriter().println("Name must start with capital letter and minimum 3 characters");
+            response.getWriter().println("<h3>Invalid Name or Password</h3>");
 
         }
     }
