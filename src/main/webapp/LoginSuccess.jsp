@@ -3,7 +3,7 @@
 <html>
 <body>
 
-<h2>Name Validation Successful</h2>
+<h2>Validation Successful</h2>
 
 Welcome <%= request.getAttribute("user") %>
 
